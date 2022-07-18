@@ -55,29 +55,25 @@ class App extends React.Component {
     e.preventDefault();    
     console.log("clicked");    
     if (this.state.passwordIsValid === true && this.state.emailIsValid === true) {
-      this.state.isSubmitted = true
+      this.setState({isSubmitted: true});
       console.log("submit true");
     } else {
-      this.state.isSubmitted = false
+      this.setState({isSubmitted: false});
       alert("Submit false")
       console.log("submit false");
 
     }
   }
 
-  handleSuccess = () => {
-    if (this.state.passwordIsValid === false || this.state.emailIsValid === false) {
-
-
-    }
-  }
 
   render() {
     
     return(
       <>
-      <div className='container'> 
-      <form onSubmit={this.handleSubmit} onClick={this.handleSuccess}>
+      {this.state.isSubmitted ? (<div className='success'><img src="https://img.icons8.com/fluency/344/cloud-checked.png"/><h1>Success</h1></div>) :
+      (<div className='container'> 
+      <h1 className='login'>Login</h1>
+      <form className='form_cont' onSubmit={this.handleSubmit}>
         <div className="mb-3">
 
           <label 
@@ -133,8 +129,8 @@ class App extends React.Component {
         // onSubmit={this.handleSubmit}
         >Submit</button>
 
-      </form>
-      </div>
+      </form> 
+      </div>)}
       </>
     )
   }
